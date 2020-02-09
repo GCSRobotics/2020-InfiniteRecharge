@@ -7,20 +7,18 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 public class ShooterSubPID extends PIDSubsystem {
   private static final WPI_TalonSRX LeftShooterMotor = new WPI_TalonSRX(Constants.LeftShooterMotor);
   private static final WPI_TalonSRX RightShooterMotor = new WPI_TalonSRX(Constants.RightShooterMotor);
 
-  private final Encoder leftEncoder = new Encoder(Constants.LeftEncoderPortA,Constants.LeftEncoderPortB);
+  private final Encoder leftEncoder = new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB);
 
   /**
    * Creates a new ShooterSubPID.
