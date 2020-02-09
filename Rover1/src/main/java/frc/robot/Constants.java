@@ -41,8 +41,9 @@ public final class Constants {
 	public static final double ShooterI = 1;
 	public static final double ShooterD = 1;
     public static final double ShooterEncoderTolerance = 1;
-    public static final double EncoderDistancePerPulse = 1;
-    public static final double ShooterSpeedRPM = 5353;
+    public static final double EncoderRevolutionsPerPulse = 1;
+    public static final double ShooterDefautTargetRPM = 5353;
+
     public final static SPI.Port Gyro = SPI.Port.kOnboardCS0;
 
     public final static int DriveJoystick = 0;

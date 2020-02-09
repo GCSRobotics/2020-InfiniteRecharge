@@ -24,12 +24,7 @@ import frc.robot.subsystems.ShooterSub;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private static DriveSub Drive = new DriveSub();
 
-  public static ShooterSub Shooter = new ShooterSub();
-  public static IndexSub Indexer = new IndexSub();
-
-  private static OI oi = new OI();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -39,7 +34,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    SmartDashboard.putData("Drivetrain", Drive);
+    SmartDashboard.putData("Drivetrain", RobotContainer.Drive);
 
   }
 
