@@ -20,26 +20,20 @@ import frc.robot.subsystems.ShooterSubPID;
  */
 public class RobotContainer {
 
-    //Subsystems
-    public static DriveSub Drive;
-    public static ShooterSubPID ShooterLeft;
-    public static ShooterSubPID ShooterRight;
+    //Drive Subsystem
+    public static DriveSub Drive = new DriveSub();
+
+    //Shooter Subsystems
+    public static ShooterSubPID ShooterLeft = new ShooterSubPID(
+        (SpeedController)new WPI_TalonSRX(Constants.LeftShooterMotor), 
+        new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB) );
+    public static ShooterSubPID ShooterRight = new ShooterSubPID(
+        (SpeedController)new WPI_TalonSRX(Constants.RightShooterMotor), 
+        new Encoder(Constants.RightEncoderPortA, Constants.LeftEncoderPortB) );
+
+    //Indexer Subsystem
     public static IndexSub Indexer;
 
     //Operator Interface
     private static OI oi = new OI();
-
-    public RobotContainer() {
-        Drive = new DriveSub();
-        ShooterLeft = new ShooterSubPID(
-            (SpeedController)new WPI_TalonSRX(Constants.LeftShooterMotor), 
-            new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB) );
-        ShooterRight = new ShooterSubPID(
-            (SpeedController)new WPI_TalonSRX(Constants.RightShooterMotor), 
-            new Encoder(Constants.RightEncoderPortA, Constants.LeftEncoderPortB) );
-    }
-
-    public void InitContainer(){
-
-    }
 }
