@@ -51,4 +51,8 @@ public class ShooterSubPID extends PIDSubsystem {
   public double getMeasurement() {
     return shooterEncoder.getRate();
   }
+
+  public boolean atSetpoint() {
+    return m_controller.atSetpoint();
+  }
 }

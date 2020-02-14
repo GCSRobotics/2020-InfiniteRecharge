@@ -36,4 +36,10 @@ public class RobotContainer {
 
     //Operator Interface
     private static OI oi = new OI();
+    
+    private final Command autoCommand = null;
+
+    public Command getAutonomousCommand() {
+        return autoCommand;
+    }
 }

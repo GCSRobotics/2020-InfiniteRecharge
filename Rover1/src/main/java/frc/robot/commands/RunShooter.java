@@ -12,13 +12,16 @@ import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.ShooterSub;;
 
 public class RunShooter extends CommandBase {
-  private ShooterSub shooterSub;
+  private ShooterSubPID shooterSubL;
+  private ShooterSubPID shooterSubR;
   private IndexSub indexSub;
 
-  public RunShooter(ShooterSub shooter, IndexSub index) {
-    shooterSub = shooter;
+  public RunShooter(ShooterSubPID shooterLeft, ShooterSubPID shooterRight, IndexSub index) {
+    shooterSubL = shooterLeft;
+    shooterSubR = shooterRight;
     indexSub = index;
-    addRequirements(shooterSub);
+    addRequirements(shooterSubL);
+    addRequirements(shooterSubR);
     addRequirements(indexSub);
   }
  
@@ -31,14 +34,34 @@ public class RunShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSub.runShooter();
-    indexSub.indexBall();
+    if (!shooterSubL.isEnabled()) {
+      shooterSubL.enable();
+    }
+
+    if (!shooterSubR.isEnabled()) {
+      shooterSubR.enable();
+    }
+
+    displayEncoderValues();
+    
+    if (shooterSubL.atSetpoint() && shooterSubR.atSetpoint()) {
+      indexSub.indexBall();
+    }
+    else {
+      indexSub.stopIndex();
+    }
+  }
+
+  public void displayEncoderValues() {
+    SmartDashboard.putNumber("Left Shooter RPM", shooterSubL.shooterEncoder.getRate());
+    SmartDashboard.putNumber("Right Shooter RPM", shooterSubR.shooterEncoder.getRate());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooterSub.stopShooter();
+    shooterSubL.disable();
+    shooterSubR.disable();
     indexSub.stopIndex();
   }
 
