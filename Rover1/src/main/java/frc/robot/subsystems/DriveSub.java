@@ -74,4 +74,9 @@ public class DriveSub extends SubsystemBase {
 		turningValue = Math.copySign(turningValue, speed);
 		robotDrive.arcadeDrive(speed, turningValue);
   }
+
+  public void turnTo(float angle) {
+    double turningValue = (angle - Gyro.getAngle()) * kP;
+    robotDrive.arcadeDrive(0, turningValue);
+  }
 }
