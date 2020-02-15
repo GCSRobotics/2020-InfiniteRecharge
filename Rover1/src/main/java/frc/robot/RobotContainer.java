@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutoCenterStart;
+import frc.robot.commands.DriveWithController;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.ShooterSubPID;
@@ -31,17 +32,21 @@ public class RobotContainer {
         new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB) );
     public static ShooterSubPID ShooterRight = new ShooterSubPID(
         (SpeedController)new WPI_TalonSRX(Constants.RightShooterMotor), 
-        new Encoder(Constants.RightEncoderPortA, Constants.LeftEncoderPortB) );
+        new Encoder(Constants.RightEncoderPortA, Constants.RightEncoderPortB) );
 
     //Indexer Subsystem
-    public static IndexSub Indexer;
+    public static IndexSub Indexer = new IndexSub();
 
     //Operator Interface
     private static OI oi = new OI();
-    
+       
     private final Command autoCommand = new AutoCenterStart(Drive, oi.GetDriverControl(), 10, ShooterLeft, ShooterRight, Indexer);
 
     public Command getAutonomousCommand() {
         return autoCommand;
+    }
+
+    public void setTeleopDefaultCommands() {
+        Drive.setDefaultCommand(new DriveWithController(Drive, oi.GetDriverControl()));
     }
 }

@@ -33,11 +33,10 @@ public class ShooterSubPID extends PIDSubsystem {
 
     // Set the encoders default revolutions per pulse used for distance/speed
     // measurements
-    encoder.setDistancePerPulse(Constants.EncoderRevolutionsPerPulse);
+    shooterEncoder.setDistancePerPulse(1/Constants.ShooterEncoderPPR);
 
     // Set the defaut speed for the shooter
     setSetpoint(Constants.ShooterDefautTargetRPM);
-
   }
 
   @Override
@@ -55,6 +54,6 @@ public class ShooterSubPID extends PIDSubsystem {
   }
  
   public boolean atSetpoint() {
-    return m_controller.atSetpoint();
+    return getController().atSetpoint();
   }
 }

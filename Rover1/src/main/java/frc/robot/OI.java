@@ -8,6 +8,7 @@
 package frc.robot;
 
 import frc.robot.controllers.BaseController;
+import frc.robot.commands.RunShooter;
 
 /**
  * Add your docs here.
@@ -31,10 +32,10 @@ public class OI {
     }
   
     private void ButtonActionInit() {
-  
       // Driver buttons.
-      //DriverControl.ButtonY.whenHeld(new RunShooter(RobotContainer.Shooter, Robot.Indexer));
+      DriverControl.ButtonY.whenHeld(new RunShooter(RobotContainer.ShooterLeft, RobotContainer.ShooterRight, RobotContainer.Indexer));
     }
+
     public BaseController GetDriverControl() {
       return DriverControl;
     }

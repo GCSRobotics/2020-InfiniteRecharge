@@ -33,7 +33,7 @@ public class DriveSub extends SubsystemBase {
   private final SpeedControllerGroup speedControllerGroupRight = 
     new SpeedControllerGroup(RightFrontMotor, RightRearMotor);
   private final DifferentialDrive robotDrive = 
-    new DifferentialDrive(speedControllerGroupLeft, speedControllerGroupRight);
+    new DifferentialDrive(speedControllerGroupRight, speedControllerGroupLeft);
 
   private final Encoder leftDriveEncoder = new Encoder(Constants.LeftDriveEncoderPortA, Constants.LeftDriveEncoderPortB);
   private final Encoder rightDriveEncoder = new Encoder(Constants.RightDriveEncoderPortA, Constants.RightDriveEncoderPortB);
@@ -42,7 +42,6 @@ public class DriveSub extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
   public DriveSub() {
-  
     addChild("LeftFront",LeftFrontMotor);
     addChild("LeftRear", LeftRearMotor);
     addChild("RightFront", RightFrontMotor);
@@ -52,6 +51,9 @@ public class DriveSub extends SubsystemBase {
     addChild("Gyro", Gyro);
     addChild("LeftDriveEncoder", leftDriveEncoder); 
     addChild("RightDriveEncoder", rightDriveEncoder);
+
+    leftDriveEncoder.setDistancePerPulse((2*Math.PI*3)/Constants.DriveEncoderPPR);
+    rightDriveEncoder.setDistancePerPulse((2*Math.PI*3)/Constants.DriveEncoderPPR);
   }
 
   public void calibrate(){

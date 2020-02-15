@@ -28,6 +28,7 @@ public final class Constants {
     public final static int LeftDriveEncoderPortB = 5;
     public final static int RightDriveEncoderPortA = 6;
     public final static int RightDriveEncoderPortB = 7;
+    public static final double DriveEncoderPPR = 2048;
 
     // Intake Constants
     public final static int IntakeMotor = 5;
@@ -41,10 +42,10 @@ public final class Constants {
     public final static int LeftShooterMotor = 0;
     public final static int RightShooterMotor = 1;
 	public static final double ShooterP = 1;
-	public static final double ShooterI = 1;
-	public static final double ShooterD = 1;
-    public static final double ShooterEncoderTolerance = 1;
-    public static final double EncoderRevolutionsPerPulse = 1;
+	public static final double ShooterI = 0;
+	public static final double ShooterD = 0;
+    public static final double ShooterEncoderTolerance = 5;
+    public static final double ShooterEncoderPPR = 2048;
     public static final double ShooterDefautTargetRPM = 5353;
 
     public final static int LeftEncoderPortA = 0;
