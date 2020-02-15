@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.controllers.BaseController;
 import frc.robot.subsystems.DriveSub;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 
 
 public class DriveSub extends SubsystemBase {
@@ -33,6 +34,10 @@ public class DriveSub extends SubsystemBase {
     new SpeedControllerGroup(RightFrontMotor, RightRearMotor);
   private final DifferentialDrive robotDrive = 
     new DifferentialDrive(speedControllerGroupLeft, speedControllerGroupRight);
+
+  private final Encoder leftDriveEncoder = new Encoder(Constants.LeftDriveEncoderPortA, Constants.LeftDriveEncoderPortB);
+  private final Encoder rightDriveEncoder = new Encoder(Constants.RightDriveEncoderPortA, Constants.RightDriveEncoderPortB);
+
   /**
    * Creates a new ExampleSubsystem.
    */
@@ -45,9 +50,10 @@ public class DriveSub extends SubsystemBase {
     addChild("ControllerLeft",speedControllerGroupLeft);
     addChild("ControllerRight", speedControllerGroupRight);
     addChild("Gyro", Gyro);
-
-   
+    addChild("LeftDriveEncoder", leftDriveEncoder); 
+    addChild("RightDriveEncoder", rightDriveEncoder);
   }
+
   public void calibrate(){
     Gyro.calibrate();
   }
@@ -73,6 +79,15 @@ public class DriveSub extends SubsystemBase {
 		// Invert the direction of the turn if we are going backwards
 		turningValue = Math.copySign(turningValue, speed);
 		robotDrive.arcadeDrive(speed, turningValue);
+  }
+
+  public void resetEncoders() {
+    leftDriveEncoder.reset();
+    rightDriveEncoder.reset();
+  }
+
+  public double getDistance() {
+    return leftDriveEncoder.getDistance();
   }
 
   public void turnTo(float angle) {

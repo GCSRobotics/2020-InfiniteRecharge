@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.AutoCenterStart;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.ShooterSubPID;
@@ -37,7 +39,7 @@ public class RobotContainer {
     //Operator Interface
     private static OI oi = new OI();
     
-    private final Command autoCommand = null;
+    private final Command autoCommand = new AutoCenterStart(Drive, oi.GetDriverControl(), 10, ShooterLeft, ShooterRight, Indexer);
 
     public Command getAutonomousCommand() {
         return autoCommand;

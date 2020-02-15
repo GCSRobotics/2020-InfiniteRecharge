@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -52,6 +50,10 @@ public class ShooterSubPID extends PIDSubsystem {
     return shooterEncoder.getRate();
   }
 
+  public Encoder getEncoder() {
+    return shooterEncoder;
+  }
+ 
   public boolean atSetpoint() {
     return m_controller.atSetpoint();
   }

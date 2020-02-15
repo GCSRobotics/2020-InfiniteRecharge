@@ -17,16 +17,24 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class DriveStraight extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSub driveSub;
-  private final BaseController driveController;
+  private final double speed;
+  private final double distance;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveStraight(DriveSub subsystem, BaseController controller) {
+  public DriveStraight(DriveSub subsystem, BaseController controller, Double distanceToTravel) {
     driveSub = subsystem;
-    driveController = controller;
+    distance = distanceToTravel;
+    
+    if (controller != null) {
+        speed = controller.getY();
+    } else {
+      speed = .5;
+    }
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSub);
   }
@@ -34,12 +42,13 @@ public class DriveStraight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    driveSub.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveSub.driveStraight(driveController.getY());
+    driveSub.driveStraight(speed);
   }
 
   // Called once the command ends or is interrupted.
@@ -50,6 +59,9 @@ public class DriveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (driveSub.getDistance() >= distance) {
+      return true;
+    }
     return false;
   }
 }

@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import frc.robot.commands.RunShooter;
 import frc.robot.controllers.BaseController;
 
 /**

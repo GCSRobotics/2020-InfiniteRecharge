@@ -9,7 +9,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSub;
-import frc.robot.subsystems.ShooterSub;;
+import frc.robot.subsystems.ShooterSubPID;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunShooter extends CommandBase {
   private ShooterSubPID shooterSubL;
@@ -53,8 +54,8 @@ public class RunShooter extends CommandBase {
   }
 
   public void displayEncoderValues() {
-    SmartDashboard.putNumber("Left Shooter RPM", shooterSubL.shooterEncoder.getRate());
-    SmartDashboard.putNumber("Right Shooter RPM", shooterSubR.shooterEncoder.getRate());
+    SmartDashboard.putNumber("Left Shooter RPM", shooterSubL.getEncoder().getRate());
+    SmartDashboard.putNumber("Right Shooter RPM", shooterSubR.getEncoder().getRate());
   }
 
   // Called once the command ends or is interrupted.

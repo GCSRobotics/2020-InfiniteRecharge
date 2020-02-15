@@ -24,6 +24,11 @@ public final class Constants {
     public final static int LeftRearDrive = 1;
     public final static int RightRearDrive = 3;
 
+    public final static int LeftDriveEncoderPortA = 4;
+    public final static int LeftDriveEncoderPortB = 5;
+    public final static int RightDriveEncoderPortA = 6;
+    public final static int RightDriveEncoderPortB = 7;
+
     // Intake Constants
     public final static int IntakeMotor = 5;
     public final static int IntakeSolenoidChannel1 = 0;
