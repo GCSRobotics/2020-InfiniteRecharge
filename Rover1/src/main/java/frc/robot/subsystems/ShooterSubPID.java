@@ -21,7 +21,7 @@ public class ShooterSubPID extends PIDSubsystem {
   /**
    * Creates a new ShooterSubPID.
    */
-  public ShooterSubPID(SpeedController shooter, Encoder encoder) {
+  public ShooterSubPID(SpeedController shooter, Encoder encoder, boolean forwardDirection) {
     // Create the PIDController that is integral to the sub system and set it's
     // tolerance
     super(new PIDController(Constants.ShooterP, Constants.ShooterI, Constants.ShooterD));
@@ -35,8 +35,14 @@ public class ShooterSubPID extends PIDSubsystem {
     // measurements
     shooterEncoder.setDistancePerPulse(1/Constants.ShooterEncoderPPR);
 
-    // Set the defaut speed for the shooter
-    setSetpoint(Constants.ShooterDefautTargetRPM);
+    if (forwardDirection) {
+      // Set the defaut speed for the shooter
+      setSetpoint(Constants.ShooterDefautTargetRPM);
+    } else {
+      shooterMotor.setInverted(true);
+      // Set the defaut speed for the shooter
+      setSetpoint(-Constants.ShooterDefautTargetRPM);
+    }
   }
 
   @Override

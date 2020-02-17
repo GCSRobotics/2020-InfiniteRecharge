@@ -29,10 +29,10 @@ public class RobotContainer {
     //Shooter Subsystems
     public static ShooterSubPID ShooterLeft = new ShooterSubPID(
         (SpeedController)new WPI_TalonSRX(Constants.LeftShooterMotor), 
-        new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB) );
+        new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB), true);
     public static ShooterSubPID ShooterRight = new ShooterSubPID(
         (SpeedController)new WPI_TalonSRX(Constants.RightShooterMotor), 
-        new Encoder(Constants.RightEncoderPortA, Constants.RightEncoderPortB) );
+        new Encoder(Constants.RightEncoderPortA, Constants.RightEncoderPortB), false);
 
     //Indexer Subsystem
     public static IndexSub Indexer = new IndexSub();
