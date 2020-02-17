@@ -8,13 +8,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 
 
@@ -26,7 +27,7 @@ public class DriveSub extends SubsystemBase {
 	private static final double kAngleSetpoint = 0.0;
 	private static final double kP = 0.005; // propotional turning constant
 
-  private static final ADXRS450_Gyro Gyro = new ADXRS450_Gyro(Constants.Gyro);
+  private static final AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
   private final SpeedControllerGroup speedControllerGroupLeft = 
     new SpeedControllerGroup(LeftFrontMotor, LeftRearMotor);
@@ -48,16 +49,16 @@ public class DriveSub extends SubsystemBase {
     addChild("RightRear", RightRearMotor);
     addChild("ControllerLeft",speedControllerGroupLeft);
     addChild("ControllerRight", speedControllerGroupRight);
-    addChild("Gyro", Gyro);
+    addChild("AHRS", ahrs);
     addChild("LeftDriveEncoder", leftDriveEncoder); 
     addChild("RightDriveEncoder", rightDriveEncoder);
 
     leftDriveEncoder.setDistancePerPulse((2*Math.PI*3)/Constants.DriveEncoderPPR);
     rightDriveEncoder.setDistancePerPulse((2*Math.PI*3)/Constants.DriveEncoderPPR);
   }
-
+ 
   public void calibrate(){
-    Gyro.calibrate();
+    ahrs.calibrate();
   }
   
   public void arcadeDrive(Joystick joy) {
@@ -77,7 +78,7 @@ public class DriveSub extends SubsystemBase {
   }
 
   public void driveStraight(double speed) {
-    double turningValue = (kAngleSetpoint - Gyro.getAngle()) * kP;
+    double turningValue = (kAngleSetpoint - ahrs.getAngle()) * kP;
 		// Invert the direction of the turn if we are going backwards
 		turningValue = Math.copySign(turningValue, speed);
 		robotDrive.arcadeDrive(speed, turningValue);
@@ -93,7 +94,7 @@ public class DriveSub extends SubsystemBase {
   }
 
   public void turnTo(float angle) {
-    double turningValue = (angle - Gyro.getAngle()) * kP;
+    double turningValue = (angle - ahrs.getAngle()) * kP;
     robotDrive.arcadeDrive(0, turningValue);
   }
 }
