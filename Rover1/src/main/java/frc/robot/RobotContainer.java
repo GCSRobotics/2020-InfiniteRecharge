@@ -13,9 +13,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutoCenterStart;
 import frc.robot.commands.DriveWithController;
-import frc.robot.subsystems.DriveSub;
-import frc.robot.subsystems.IndexSub;
-import frc.robot.subsystems.ShooterSubPID;
+import frc.robot.subsystems.*;
 
 /**
  * Add your docs here.
@@ -24,6 +22,9 @@ public class RobotContainer {
 
     //Drive Subsystem
     public static DriveSub Drive = new DriveSub();
+
+    //Climber Subsystem
+    public static ClimberSub Climber = new ClimberSub();
 
     //Shooter Subsystems
     public static ShooterSubPID ShooterLeft = new ShooterSubPID(
