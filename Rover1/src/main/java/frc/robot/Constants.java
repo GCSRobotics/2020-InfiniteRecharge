@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj.SPI;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    // Climber Constants
+    public final static int ClimberMotor = 6;
+
     // Drive Constants
     public final static int LeftFrontDrive = 0;
     public final static int RightFrontDrive = 2;
@@ -41,12 +44,12 @@ public final class Constants {
     // Shooter Constants
     public final static int LeftShooterMotor = 0;
     public final static int RightShooterMotor = 1;
-	public static final double ShooterP = 1;
+	public static final double ShooterP = .25;
 	public static final double ShooterI = 0;
 	public static final double ShooterD = 0;
     public static final double ShooterEncoderTolerance = 5;
     public static final double ShooterEncoderPPR = 2048;
-    public static final double ShooterDefautTargetRPM = 5353;
+    public static final double ShooterDefaultTargetRPM = 50;
 
     public final static int LeftEncoderPortA = 0;
     public final static int LeftEncoderPortB = 1;

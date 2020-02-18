@@ -10,7 +10,6 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutoCenterStart;
 import frc.robot.commands.DriveWithController;
@@ -28,10 +27,10 @@ public class RobotContainer {
 
     //Shooter Subsystems
     public static ShooterSubPID ShooterLeft = new ShooterSubPID(
-        (SpeedController)new WPI_TalonSRX(Constants.LeftShooterMotor), 
+        new WPI_TalonSRX(Constants.LeftShooterMotor), 
         new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB), true);
     public static ShooterSubPID ShooterRight = new ShooterSubPID(
-        (SpeedController)new WPI_TalonSRX(Constants.RightShooterMotor), 
+        new WPI_TalonSRX(Constants.RightShooterMotor), 
         new Encoder(Constants.RightEncoderPortA, Constants.RightEncoderPortB), false);
 
     //Indexer Subsystem
