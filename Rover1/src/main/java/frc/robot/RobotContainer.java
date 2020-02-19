@@ -37,6 +37,9 @@ public class RobotContainer {
     //Indexer Subsystem
     public static IndexSub Indexer = new IndexSub();
 
+    //Intake Subsystem
+    public static IntakeSub Intake = new IntakeSub();
+
     //Operator Interface
     private static OI oi = new OI();
        
