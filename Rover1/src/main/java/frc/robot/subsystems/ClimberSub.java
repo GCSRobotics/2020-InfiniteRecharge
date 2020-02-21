@@ -35,6 +35,6 @@ public class ClimberSub extends SubsystemBase {
   }
 
   public void retractClimber() {
-    climberMotor.set(.5));
+    climberMotor.set(.5);
   }
 }

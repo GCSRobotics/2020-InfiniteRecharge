@@ -33,7 +33,7 @@ public class OI {
   
     private void ButtonActionInit() {
       // Driver buttons.
-      DriverControl.ButtonY.whenPressed(new RunShooter(RobotContainer.ShooterLeft, RobotContainer.ShooterRight, RobotContainer.Indexer));
+      DriverControl.ButtonY.whileHeld(new RunShooter(RobotContainer.ShooterLeft, RobotContainer.ShooterRight, RobotContainer.Indexer));
       OperatorControl.ButtonR1.whenPressed(new RunIntake(RobotContainer.Intake));
       OperatorControl.ButtonL1.whenPressed(new ReverseIntake(RobotContainer.Intake));
     }

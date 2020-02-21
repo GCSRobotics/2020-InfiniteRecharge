@@ -11,8 +11,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 
@@ -20,7 +18,6 @@ public class ShooterSubPID extends PIDSubsystem {
 
   private final WPI_TalonSRX shooterMotor;
   private final Encoder shooterEncoder;
-  private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(ks, kv);
 
   /**
    * Creates a new ShooterSubPID.

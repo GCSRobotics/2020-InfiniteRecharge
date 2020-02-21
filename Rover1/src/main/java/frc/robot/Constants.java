@@ -44,17 +44,18 @@ public final class Constants {
     // Shooter Constants
     public final static int LeftShooterMotor = 0;
     public final static int RightShooterMotor = 1;
-	public static final double ShooterP = .25;
+	public static final double ShooterP = .15;
 	public static final double ShooterI = 0;
 	public static final double ShooterD = 0;
     public static final double ShooterEncoderTolerance = 5;
     public static final double ShooterEncoderPPR = 2048;
-    public static final double ShooterDefaultTargetRPM = 50;
+    public static final double ShooterDefaultTargetRPM = 100;
 
     public final static int LeftEncoderPortA = 0;
     public final static int LeftEncoderPortB = 1;
     public final static int RightEncoderPortA = 2;
     public final static int RightEncoderPortB = 3;
+    public final static int shooterCamera = 0;
 
     public final static SPI.Port Gyro = SPI.Port.kOnboardCS0;
 
