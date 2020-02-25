@@ -42,8 +42,8 @@ public final class Constants {
     public final static int IndexMotor = 4;
 
     // Shooter Constants
-    public final static int LeftShooterMotor = 0;
-    public final static int RightShooterMotor = 1;
+    public final static int LeftShooterMotor = 1;
+    public final static int RightShooterMotor = 0;
 	public static final double ShooterP = .15;
 	public static final double ShooterI = 0;
 	public static final double ShooterD = 0;

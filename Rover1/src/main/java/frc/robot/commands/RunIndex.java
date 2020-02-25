@@ -7,51 +7,41 @@
 
 package frc.robot.commands;
 
-import java.util.Timer;
-
-import com.ctre.phoenix.time.StopWatch;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSub;
+import frc.robot.subsystems.IndexSub;
 
-public class RunIntake extends CommandBase {
-  private final IntakeSub intakeSub;
-  private StopWatch stopWatch;
+public class RunIndex extends CommandBase {
+  private final IndexSub indexSub;
 
   /**
    * Creates a new RunIntake.
     */
-  public RunIntake(IntakeSub subsystem ) {
-    intakeSub = subsystem;
-    
+  public RunIndex(IndexSub subsystem ) {
+    indexSub = subsystem;
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is; initially scheduled.
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stopWatch = new StopWatch();
-    stopWatch.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSub.runIntake();
+    indexSub.indexBall();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeSub.stopIntake();
+    indexSub.stopIndex();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (stopWatch.getDuration() > 10.0) {
-      return true;
-    }
     return false;
   }
 }

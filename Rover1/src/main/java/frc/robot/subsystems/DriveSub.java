@@ -27,7 +27,7 @@ public class DriveSub extends SubsystemBase {
 	private static final double kAngleSetpoint = 0.0;
 	private static final double kP = 0.005; // propotional turning constant
 
-  private static final AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  public final AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
   private final SpeedControllerGroup speedControllerGroupLeft = 
     new SpeedControllerGroup(LeftFrontMotor, LeftRearMotor);
@@ -75,6 +75,10 @@ public class DriveSub extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void stop() {
+    robotDrive.arcadeDrive(0, 0);
   }
 
   public void driveStraight(double speed) {

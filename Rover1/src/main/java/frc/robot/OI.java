@@ -33,9 +33,15 @@ public class OI {
   
     private void ButtonActionInit() {
       // Driver buttons.
-      DriverControl.ButtonY.whileHeld(new RunShooter(RobotContainer.ShooterLeft, RobotContainer.ShooterRight, RobotContainer.Indexer));
-      OperatorControl.ButtonR1.whenPressed(new RunIntake(RobotContainer.Intake));
-      OperatorControl.ButtonL1.whenPressed(new ReverseIntake(RobotContainer.Intake));
+
+      // Operator buttons.
+      //OperatorControl.ButtonA.whileHeld(new AutoCenterStart(RobotContainer.Drive, 120, RobotContainer.ShooterLeft, RobotContainer.ShooterRight, RobotContainer.Indexer));
+      OperatorControl.ButtonY.whileHeld(new StartShooter(RobotContainer.Shooter));
+      OperatorControl.ButtonR1.whileHeld(new RunIntake(RobotContainer.Intake));
+      OperatorControl.ButtonL1.whileHeld(new ReverseIntake(RobotContainer.Intake));
+      OperatorControl.ButtonB.whileHeld(new RunIndex(RobotContainer.Indexer));
+      OperatorControl.ButtonX.whileHeld(new ReverseIndex(RobotContainer.Indexer));
+      // OperatorControl.ButtonX.whenPressed(new DriveStraight(RobotContainer.Drive, 120.0));
     }
 
     public BaseController GetDriverControl() {

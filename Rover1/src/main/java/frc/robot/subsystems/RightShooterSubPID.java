@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 
-public class ShooterSubPID extends PIDSubsystem {
+public class RightShooterSubPID extends PIDSubsystem {
 
   private final WPI_TalonSRX shooterMotor;
   private final Encoder shooterEncoder;
@@ -22,10 +22,10 @@ public class ShooterSubPID extends PIDSubsystem {
   /**
    * Creates a new ShooterSubPID.
    */
-  public ShooterSubPID(WPI_TalonSRX shooter, Encoder encoder, boolean forwardDirection) {
+  public RightShooterSubPID(WPI_TalonSRX shooter, Encoder encoder) {
     // Create the PIDController that is integral to the sub system and set it's
     // tolerance
-    super(new PIDController(Constants.ShooterP, Constants.ShooterI, Constants.ShooterD));
+    super(new PIDController(.9, Constants.ShooterI, Constants.ShooterD));
     getController().setTolerance(Constants.ShooterEncoderTolerance);
 
     // Setup the motor and encoder
@@ -35,13 +35,10 @@ public class ShooterSubPID extends PIDSubsystem {
     // Set the encoders default revolutions per pulse used for distance/speed
     // measurements
     shooterEncoder.setDistancePerPulse(1/Constants.ShooterEncoderPPR);
+    shooterMotor.setInverted(true);
     
     // Set the defaut speed for the shooter
     setSetpoint(Constants.ShooterDefaultTargetRPM);
-
-    if (forwardDirection) {
-      shooterMotor.setInverted(true);
-    }
 
     addChild("ShooterMotor", shooterMotor);
     addChild("ShooterEncoder", shooterEncoder); 

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutoCenterStart;
+import frc.robot.commands.DriveStraight;
 import frc.robot.commands.DriveWithController;
 import frc.robot.subsystems.*;
 
@@ -27,12 +28,13 @@ public class RobotContainer {
     public static ClimberSub Climber = new ClimberSub();
 
     //Shooter Subsystems
-    public static ShooterSubPID ShooterLeft = new ShooterSubPID(
+    public static ShooterSub Shooter = new ShooterSub();
+    public static LeftShooterSubPID ShooterLeft = new LeftShooterSubPID(
         new WPI_TalonSRX(Constants.LeftShooterMotor), 
-        new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB), true);
-    public static ShooterSubPID ShooterRight = new ShooterSubPID(
+        new Encoder(Constants.LeftEncoderPortA, Constants.LeftEncoderPortB));
+    public static RightShooterSubPID ShooterRight = new RightShooterSubPID(
         new WPI_TalonSRX(Constants.RightShooterMotor), 
-        new Encoder(Constants.RightEncoderPortA, Constants.RightEncoderPortB), false);
+        new Encoder(Constants.RightEncoderPortA, Constants.RightEncoderPortB));
 
     //Indexer Subsystem
     public static IndexSub Indexer = new IndexSub();
@@ -43,7 +45,7 @@ public class RobotContainer {
     //Operator Interface
     private static OI oi = new OI();
        
-    private final Command autoCommand = new AutoCenterStart(Drive, oi.GetDriverControl(), 10, ShooterLeft, ShooterRight, Indexer);
+    private final Command autoCommand = new AutoCenterStart(Drive, 35, ShooterLeft, ShooterRight, Indexer);
 
     public Command getAutonomousCommand() {
         return autoCommand;

@@ -21,19 +21,23 @@ public class IndexSub extends SubsystemBase {
    */
   public IndexSub() {
     addChild("IndexMotor",IndexMotor);
-
-
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void indexBall(){
-    IndexMotor.set(.60);
+
+  public void shootBall() {
+    IndexMotor.set(.4);
   }
+
+  public void indexBall(){
+    IndexMotor.set(.3);
+  }
+  
   public void reverseIndex(){
-    IndexMotor.set(-.60);
+    IndexMotor.set(-.3);
   }
 
   public void stopIndex(){

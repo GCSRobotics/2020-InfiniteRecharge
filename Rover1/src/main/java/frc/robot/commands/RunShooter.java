@@ -8,22 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IndexSub;
-import frc.robot.subsystems.ShooterSubPID;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunShooter extends CommandBase {
-  private ShooterSubPID shooterSubL;
-  private ShooterSubPID shooterSubR;
+  private LeftShooterSubPID shooterSubL;
+  private RightShooterSubPID shooterSubR;
   private IndexSub indexSub;
+  private ShooterSub shooterSub;
 
-  public RunShooter(ShooterSubPID shooterLeft, ShooterSubPID shooterRight, IndexSub index) {
+  public RunShooter(ShooterSub shooter, LeftShooterSubPID shooterLeft, RightShooterSubPID shooterRight, IndexSub index) {
+    shooterSub = shooter;
     shooterSubL = shooterLeft;
     shooterSubR = shooterRight;
     indexSub = index;
     addRequirements(shooterSubL);
     addRequirements(shooterSubR);
-    addRequirements(indexSub);
+    // addRequirements(indexSub);
+    addRequirements(shooterSub);
   }
  
 
@@ -35,27 +37,33 @@ public class RunShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!shooterSubL.isEnabled()) {
-      shooterSubL.enable();
-    }
+    shooterSub.shoot();
+    indexSub.shootBall();
+    // if (!shooterSubL.isEnabled()) {
+    //   shooterSubL.enable();
+    // }
 
-    if (!shooterSubR.isEnabled()) {
-      shooterSubR.enable();
-    }
+    // if (!shooterSubR.isEnabled()) {
+    //   shooterSubR.enable();
+    // }
 
-    displayEncoderValues();
+    // displayEncoderValues();
     
-    if (shooterSubL.atSetpoint() && shooterSubR.atSetpoint()) {
-      indexSub.indexBall();
-    }
-    else {
-      indexSub.stopIndex();
-    }
+    // if (shooterSubL.atSetpoint() && shooterSubR.atSetpoint()) {
+    //   indexSub.indexBall();
+    // }
+    // else {
+    //   indexSub.stopIndex();
+    // }
   }
 
   public void displayEncoderValues() {
-    SmartDashboard.putNumber("Left Shooter RPM", shooterSubL.getEncoder().getRate());
-    SmartDashboard.putNumber("Right Shooter RPM", shooterSubR.getEncoder().getRate());
+    boolean[] setpointArray = {shooterSubL.atSetpoint(), shooterSubR.atSetpoint()};
+    // SmartDashboard.putNumber("Left Shooter RPM", shooterSubL.getEncoder().getRate());
+    // SmartDashboard.putBooleanArray("Shooters At Setpoint", setpointArray);
+    // SmartDashboard.putNumber("Right Shooter RPM", shooterSubR.getEncoder().getRate());
+    SmartDashboard.putNumber("Left Shooter Velocity", shooterSub.getLeftVelocity());
+    SmartDashboard.putNumber("Right Shooter Velocity", shooterSub.getRightVelocity());
   }
 
   // Called once the command ends or is interrupted.

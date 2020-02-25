@@ -7,8 +7,11 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.controllers.BaseController;
 import frc.robot.subsystems.DriveSub;
+import frc.robot.subsystems.ShooterSub;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -18,22 +21,24 @@ public class DriveStraight extends CommandBase {
   private final DriveSub driveSub;
   private final double speed;
   private final double distance;
+  private final ShooterSub shooter;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveStraight(DriveSub subsystem, BaseController controller, Double distanceToTravel) {
+  public DriveStraight(DriveSub subsystem, ShooterSub shooterSub, Double distanceToTravel) {
     driveSub = subsystem;
-    distance = distanceToTravel;
-    
-    if (controller != null) {
-        speed = controller.getY();
+    shooter = shooterSub;
+    distance = Math.abs(distanceToTravel);
+    SmartDashboard.putNumber("Distance To Drive", distance);
+   
+    if (distanceToTravel < 0) {
+      speed = -.7;
     } else {
-      speed = .5;
+      speed = .7;
     }
-    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSub);
   }
@@ -47,18 +52,21 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    shooter.shoot();
     driveSub.driveStraight(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveSub.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (driveSub.getDistance() >= distance) {
+    SmartDashboard.putNumber("Distance To Driven", driveSub.getDistance());
+    if (Math.abs(driveSub.getDistance()) >= distance) {
       return true;
     }
     return false;
