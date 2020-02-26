@@ -17,7 +17,6 @@ public class ReverseIndex extends CommandBase {
    */
   public ReverseIndex(IndexSub subsystem) {
     indexSub = subsystem;
-    addChild("IndexMotor", IndexMotor );
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
