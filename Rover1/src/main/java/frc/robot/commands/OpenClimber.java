@@ -8,21 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSub;
+import frc.robot.subsystems.ClimberSub;
 
-public class RunIntake extends CommandBase {
-  private final IntakeSub intakeSub;
+public class OpenClimber extends CommandBase {
+  private static ClimberSub climberSub;
 
   /**
-   * Creates a new RunIntake.
-    */
-  public RunIntake(IntakeSub subsystem ) {
-    intakeSub = subsystem;
-    
+   * Creates a new OpenClimber.
+   */
+  public OpenClimber(ClimberSub subsystem) {
+    climberSub = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is; initially scheduled.
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -30,13 +29,13 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSub.runIntake();
+    climberSub.extendClimber();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeSub.stopIntake();
+    climberSub.stopClimber();
   }
 
   // Returns true when the command should end.

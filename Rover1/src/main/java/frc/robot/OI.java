@@ -33,6 +33,8 @@ public class OI {
   
     private void ButtonActionInit() {
       // Driver buttons.
+      DriverControl.ButtonY.whileHeld(new OpenClimber(RobotContainer.Climber));
+      DriverControl.ButtonX.whileHeld(new Climb(RobotContainer.Climber));
 
       // Operator buttons.
       //OperatorControl.ButtonA.whileHeld(new AutoCenterStart(RobotContainer.Drive, 120, RobotContainer.ShooterLeft, RobotContainer.ShooterRight, RobotContainer.Indexer));

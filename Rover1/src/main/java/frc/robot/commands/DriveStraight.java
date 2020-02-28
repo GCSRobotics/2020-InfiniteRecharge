@@ -7,8 +7,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
-import frc.robot.controllers.BaseController;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.ShooterSub;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -65,7 +63,7 @@ public class DriveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    SmartDashboard.putNumber("Distance To Driven", driveSub.getDistance());
+    SmartDashboard.putNumber("Distance Driven", driveSub.getDistance());
     if (Math.abs(driveSub.getDistance()) >= distance) {
       return true;
     }

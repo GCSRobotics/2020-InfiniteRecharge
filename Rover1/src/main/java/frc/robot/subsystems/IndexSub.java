@@ -20,7 +20,7 @@ import io.github.pseudoresonance.pixy2api.links.SPILink;
 
 public class IndexSub extends SubsystemBase {
   private static final WPI_VictorSPX IndexMotor = new WPI_VictorSPX(Constants.IndexMotor);
-  private static final Pixy2 pixy = Pixy2.createInstance(new SPILink());
+  private static final Pixy2 pixy = Pixy2.createInstance(new SPILink()) ;
   private static final int blockSignature = 1;
   private Block lastBlock = null;
 
@@ -32,29 +32,34 @@ public class IndexSub extends SubsystemBase {
     pixy.init();
     pixy.setLamp((byte) 1, (byte) 1);
 		pixy.setLED(255, 255, 255);
+    System.out.println("IndexSub Create");
+    //System.out.println("Pixy Version:" + pixy.getVersionInfo().toString());
     addChild("IndexMotor",IndexMotor);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    int blockCount = pixy.getCCC().getBlocks();
-    if (blockCount == 0) {
-      return;
-    }
-    ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
-    for (Block block : blocks) {
-      //calculate
-      if (block.getSignature() == blockSignature) {
-        if (lastBlock == null && block.getHeight() > pixy.getFrameHeight()/2) {
-          lastBlock = block;
-          indexBall();
-        }
-        if (lastBlock != null && block.getHeight() == 1) {
-          lastBlock = null;
-          stopIndex();
-        }
+    if (pixy != null) {
+      // This method will be called once per scheduler run
+      int blockCount = pixy.getCCC().getBlocks();
+      if (blockCount == 0) {
+        return;
+      }
+      ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
+      for (Block block : blocks) {
+        //calculate
+        if (block.getSignature() == blockSignature) {
+          if (lastBlock == null && block.getHeight() > pixy.getFrameHeight()/2) {
+            lastBlock = block;
+            indexBall();
+          }
+          System.out.println("Block Size: " + block.getHeight());
+          if (lastBlock != null && block.getHeight() == 1) {
+            lastBlock = null;
+            stopIndex();
+          }
 
+        }
       }
     }
   }

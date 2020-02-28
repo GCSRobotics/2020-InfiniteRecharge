@@ -30,11 +30,15 @@ public class ClimberSub extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void extendClimber() {
+  public void stopClimber() {
+    climberMotor.set(0);
+  }
 
+  public void extendClimber() {
+    climberMotor.set(-.8);
   }
 
   public void retractClimber() {
-    climberMotor.set(.5);
+    climberMotor.set(-1);
   }
 }

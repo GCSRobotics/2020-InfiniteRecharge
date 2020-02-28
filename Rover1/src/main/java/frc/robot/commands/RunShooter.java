@@ -58,10 +58,6 @@ public class RunShooter extends CommandBase {
   }
 
   public void displayEncoderValues() {
-    boolean[] setpointArray = {shooterSubL.atSetpoint(), shooterSubR.atSetpoint()};
-    // SmartDashboard.putNumber("Left Shooter RPM", shooterSubL.getEncoder().getRate());
-    // SmartDashboard.putBooleanArray("Shooters At Setpoint", setpointArray);
-    // SmartDashboard.putNumber("Right Shooter RPM", shooterSubR.getEncoder().getRate());
     SmartDashboard.putNumber("Left Shooter Velocity", shooterSub.getLeftVelocity());
     SmartDashboard.putNumber("Right Shooter Velocity", shooterSub.getRightVelocity());
   }
