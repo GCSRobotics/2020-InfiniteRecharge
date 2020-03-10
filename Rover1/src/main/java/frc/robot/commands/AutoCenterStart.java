@@ -25,9 +25,11 @@ public class AutoCenterStart extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super(
-      new ReverseIndex(indexSub).withTimeout(.5),
-      new DriveStraight(driveSub, RobotContainer.Shooter, distance).withTimeout(1.5),
-      new RunShooter(RobotContainer.Shooter, shooterLeft, shooterRight, indexSub).withTimeout(3)
+      new DriveStraight(driveSub, RobotContainer.Shooter, -3.0).withTimeout(.2),
+      new DriveStraight(driveSub, RobotContainer.Shooter, 3.0).withTimeout(.2),
+      // new ReverseIndex(indexSub).withTimeout(.5),
+      new RunShooter(RobotContainer.Shooter, shooterLeft, shooterRight, indexSub).withTimeout(3),
+      new DriveStraight(driveSub, RobotContainer.Shooter, distance).withTimeout(1)
     );
   }
 }

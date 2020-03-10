@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutoCenterStart;
 import frc.robot.commands.DriveWithController;
+import frc.robot.commands.FeedAnotherBot;
 import frc.robot.subsystems.*;
 
 /**
@@ -45,6 +46,7 @@ public class RobotContainer {
     private static OI oi = new OI();
        
     private final Command autoCommand = new AutoCenterStart(Drive, 35, ShooterLeft, ShooterRight, Indexer);
+    // private final Command autoCommand = new FeedAnotherBot(Drive, 60.0, Indexer, Intake);
 
     public Command getAutonomousCommand() {
         return autoCommand;
