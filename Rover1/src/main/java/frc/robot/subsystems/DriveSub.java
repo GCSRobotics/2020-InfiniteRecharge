@@ -67,7 +67,9 @@ public class DriveSub extends SubsystemBase {
    }
   
   public void arcadeDrive(Joystick joy) {
-    robotDrive.arcadeDrive(joy.getY(), joy.getRawAxis(4), true);
+    double speed = joy.getY() * .01;
+    robotDrive.arcadeDrive(speed, joy.getRawAxis(4), true);
+    // robotDrive.arcadeDrive(joy.getY(), joy.getRawAxis(4), true);
   }
 
   public void arcadeDrive(double speedAxis, double rotationAxis) {

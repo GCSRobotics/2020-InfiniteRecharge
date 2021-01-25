@@ -10,11 +10,16 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutoCenterStart;
 import frc.robot.commands.DriveWithController;
 import frc.robot.commands.FeedAnotherBot;
 import frc.robot.subsystems.*;
+
+import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorSensorV3;
 
 /**
  * Add your docs here.
@@ -47,6 +52,8 @@ public class RobotContainer {
        
     private final Command autoCommand = new AutoCenterStart(Drive, 35, ShooterLeft, ShooterRight, Indexer);
     // private final Command autoCommand = new FeedAnotherBot(Drive, 60.0, Indexer, Intake);
+
+   
 
     public Command getAutonomousCommand() {
         return autoCommand;

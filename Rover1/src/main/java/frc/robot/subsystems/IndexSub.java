@@ -7,10 +7,15 @@
 
 package frc.robot.subsystems;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorMatchResult;
+import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import io.github.pseudoresonance.pixy2api.Pixy2;
@@ -23,6 +28,8 @@ public class IndexSub extends SubsystemBase {
   private static final Pixy2 pixy = Pixy2.createInstance(new SPILink()) ;
   private static final int blockSignature = 1;
   private Block lastBlock = null;
+  private final ColorSensorV3 colorSensor = new ColorSensorV3(Constants.i2cPort);
+  private final ColorMatch colorMatcher = new ColorMatch();
 
 
   /**
@@ -35,10 +42,25 @@ public class IndexSub extends SubsystemBase {
     System.out.println("IndexSub Create");
     //System.out.println("Pixy Version:" + pixy.getVersionInfo().toString());
     addChild("IndexMotor",IndexMotor);
+    // addChild("colorSensor", colorSensor);
+    // addChild("colorMatcher", colorMatcher);
+    colorMatcher.addColorMatch(Constants.YellowTarget);    
   }
+
 
   @Override
   public void periodic() {
+    Color detectedColor = colorSensor.getColor();
+    ColorMatchResult match = colorMatcher.matchColor(detectedColor);
+    if(match != null){
+      System.out.println("color: " + match.color);
+    }
+    if (match != null && match.color == Constants.YellowTarget) {
+     indexBall();
+    } else {
+      stopIndex();
+    }
+
     if (pixy != null) {
       // This method will be called once per scheduler run
       int blockCount = pixy.getCCC().getBlocks();
@@ -67,13 +89,13 @@ public class IndexSub extends SubsystemBase {
   public void shootBall() {
     IndexMotor.set(.4);
   }
-
+ //Index motor backward speed
   public void indexBall(){
-    IndexMotor.set(.3);
+    IndexMotor.set(-.7);
   }
-  
+  //Index motor backward speed
   public void reverseIndex(){
-    IndexMotor.set(-.3);
+    IndexMotor.set(.3);
   }
 
   public void stopIndex(){

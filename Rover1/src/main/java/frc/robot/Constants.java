@@ -7,7 +7,11 @@
 
 package frc.robot;
 
+import com.revrobotics.ColorMatch;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.util.Color;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -18,14 +22,18 @@ import edu.wpi.first.wpilibj.SPI;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Climber Constants
-    public final static int ClimberMotor = 6;
+    //Climb Constants
 
-    // Drive Constants
+    // Motor Constants
     public final static int LeftFrontDrive = 0;
     public final static int RightFrontDrive = 2;
     public final static int LeftRearDrive = 1;
     public final static int RightRearDrive = 3;
+    public final static int IndexMotor = 4;
+    public final static int IntakeMotor = 5;
+    public final static int LeftShooterMotor = 6;
+    public final static int RightShooterMotor = 7 ;
+    public final static int ClimberMotor = 8;
 
     public final static int LeftDriveEncoderPortA = 4;
     public final static int LeftDriveEncoderPortB = 5;
@@ -34,16 +42,15 @@ public final class Constants {
     public static final double DriveEncoderPPR = 2048;
 
     // Intake Constants
-    public final static int IntakeMotor = 5;
+    
     public final static int IntakeSolenoidChannel1 = 0;
     public final static int IntakeSolenoidChannel2 = 1;
 
     // Index Constants
-    public final static int IndexMotor = 4;
+   
 
     // Shooter Constants
-    public final static int LeftShooterMotor = 1;
-    public final static int RightShooterMotor = 0;
+   
 	public static final double ShooterP = .15;
 	public static final double ShooterI = 0;
 	public static final double ShooterD = 0;
@@ -61,6 +68,13 @@ public final class Constants {
 
     public final static int DriveJoystick = 0;
     public final static int OperatorJoystick = 1;
+
+    public final static I2C.Port i2cPort = I2C.Port.kOnboard;
+   
+    public final static Color  kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+    public final static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+    public final static Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+    public final static Color YellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 	
 	
 	
